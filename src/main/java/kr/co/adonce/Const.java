@@ -16,6 +16,7 @@ public class Const {
 	 */
 	public static final class NameTest {
 		public static final String NAME_TEST = "test_name";
+		public static final String NAME_TEST2 = "test_name2";
 	}
 
 }
