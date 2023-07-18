@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://logging.apache.org/log4j/2.x/manual/appenders.html -->
+<!-- https://logging.apache.org/log4j/2.x/manual/appenders.html#AsyncAppender -->
+<!-- https://logging.apache.org/log4j/2.x/manual/async.html -->
+<Configuration>
+	<Appenders>
+	
+		<Console name="ConsoleAppender" target="SYSTEM_OUT">
+			<PatternLayout pattern="%highlight{(%d{yyyy-MM-dd HH:mm:ss}) &lt;%10t&gt; [%5p] %m (%F:%L) %n}{WARN=Bright magenta, DEBUG=white, TRACE=Bright black}" />
+		</Console>
+		
+		<RollingFile name="RequestResponseAppender" 
+					fileName="/opt/sbp//logs/pcl/sbp.log" 
+					filePattern="/opt/sbp//logs/pcl/sbp-%d{yyyy-MM-dd}-%i.gz"
+					append="true">
+			<PatternLayout pattern="%highlight{(%d{yyyy-MM-dd HH:mm:ss}) &lt;%10t&gt; [%5p] %m (%F:%L) %n}{WARN=Bright magenta, DEBUG=white, TRACE=Bright black}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="256MB" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		
+		<logger name="test" level="debug" additivity="false" includeLocation="true">
+			<AppenderRef ref="ConsoleAppender" />
+		</logger>
+		
+		<logger name="junit.test" level="debug" additivity="false" includeLocation="true">
+			<AppenderRef ref="ConsoleAppender" />
+		</logger>
+		
+		<logger name="org.springframework" level="info" additivity="false" includeLocation="true">
+			<AppenderRef ref="ConsoleAppender" />
+		</logger>
+		
+		<logger name="kr.co.adonce.sbp" level="debug" additivity="false" includeLocation="true">
+			<AppenderRef ref="ConsoleAppender" />
+		</logger>
+		
+		<logger name="kr.co.adonce.sbp.dao" level="info" additivity="false" includeLocation="true">
+			<AppenderRef ref="ConsoleAppender" />
+		</logger>
+		
+		<logger name="kr.co.adonce.sbp.service" level="debug" additivity="false" includeLocation="true">
+			<AppenderRef ref="ConsoleAppender" />
+		</logger>
+    
+		<logger name="kr.co.adonce.sbp.security" level="debug" additivity="false" includeLocation="true">
+			<AppenderRef ref="ConsoleAppender" />
+		</logger>
+		
+		
+		
+		
+		<Root level="warn" includeLocation="true">
+			<AppenderRef ref="ConsoleAppender" />
+		</Root>
+	</Loggers>
+
+</Configuration>
