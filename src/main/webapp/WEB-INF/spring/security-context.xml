@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http pattern="/css/**" security="none" />
+	<http pattern="/fonts/**" security="none" />
+	<http pattern="/images/**" security="none" />
+	<http pattern="/scripts/**" security="none" />
+	<http pattern="/templates/**" security="none" />
+	<http pattern="/management/signup" security="none" />
+	<!-- <http pattern="/management/users/**" security="none" /> -->
+	<http pattern="/management/users/signup" security="none" />
+	<http pattern="/signup" security="none" />
+	<http pattern="/init-password/**" security="none" />
+	<http pattern="/management/init-password/**" security="none" />
+	<http pattern="/common/upload" security="none" />
+	<http pattern="/subscription/listen" security="none" />
+
+	<!-- services -->
+	<http pattern="/services/**" security="none" />
+
+	<http auto-config="true" disable-url-rewriting="true"
+		use-expressions="false"
+		entry-point-ref="CustomAuthenticationEntryPoint">
+		<form-login login-page="/"
+			authentication-failure-url="/login?error=true"
+			authentication-success-handler-ref="authentication-success-handler"
+			authentication-failure-handler-ref="authentication-failure-handler"
+			login-processing-url="/j_security_check" />
+
+		<logout logout-url="/j_spring_security_logout"
+			logout-success-url="/" invalidate-session="true" />
+
+		<session-management
+			session-fixation-protection="newSession">
+			<concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="false" />
+		</session-management>
+
+		<csrf disabled="true" />
+		<csrf token-repository-ref="csrfTokenRepository" />
+	</http>
+
+	<authentication-manager>
+		<authentication-provider
+			ref="userAuthenticationProvider" />
+	</authentication-manager>
+
+	<beans:bean id="csrfTokenRepository"
+		class="org.springframework.security.web.csrf.CookieCsrfTokenRepository">
+		<beans:property name="cookieHttpOnly" value="false"></beans:property>
+	</beans:bean>
+
+	<beans:bean id="userAuthenticationProvider"
+		class="kr.co.adonce.security.UserAuthenticationProvider">
+	</beans:bean>
+
+	<beans:bean id="authentication-success-handler"
+		class="kr.co.adonce.security.LoginAuthSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="/"></beans:property>
+	</beans:bean>
+
+	<beans:bean id="authentication-failure-handler"
+		class="kr.co.adonce.security.LoginAuthFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/"></beans:property>
+	</beans:bean>
+
+	<beans:bean
+		class="kr.co.adonce.security.SBPFilterInvocationSecurityMetadataSourcePostProcessor">
+		<beans:property name="securityMetadataSource">
+			<beans:bean
+				class="kr.co.adonce.security.SBPFilterInvocationSecurityMetadataSource">
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+</beans:beans>

@@ -1,0 +1,16 @@
+<script type="text/javascript">
+	function InvalidUrlCtrl($scope, factoryDataBus){
+		$scope.invalidUrl = factoryDataBus.get("invalid_url");
+	}
+
+	angular.module(APP_NAME).controller("InvalidUrlCtrl", InvalidUrlCtrl);
+</script>
+
+<div ng-controller="InvalidUrlCtrl" style="text-align: center;">
+	<p>
+	<br>
+	잘못된 URL({{invalidUrl}})을 요청하였습니다.
+	<br>
+	</p>
+
+</div>
