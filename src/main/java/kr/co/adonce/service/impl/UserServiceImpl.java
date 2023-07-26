@@ -32,7 +32,7 @@ import open.commons.Result;
 @Service(UserServiceImpl.BEAN_QUALIFIER)
 public class UserServiceImpl extends GenericServiceImpl implements IUserService {
 
-	public static final String BEAN_QUALIFIER = "kr.re.etri.iot.fcp.pcl.service.impl.UserServiceImpl";
+	public static final String BEAN_QUALIFIER = "kr.co.adonce.sbp.service.impl.UserServiceImpl";
 
 	@Autowired
 	@Qualifier(UserGradeDaoImpl.BEAN_QUALIFIER)

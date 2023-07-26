@@ -20,7 +20,7 @@ import open.commons.utils.SQLUtils;
 @Repository(UserDaoImpl.BEAN_QUALIFIER)
 public class UserDaoImpl extends PostgreDbGenericDaoImpl implements IUserDao {
 
-	public static final String BEAN_QUALIFIER = "kr.re.etri.iot.fcp.pcl.dao.impl.UserDaoImpl";
+	public static final String BEAN_QUALIFIER = "kr.co.adonce.sbp.dao.impl.UserDaoImpl";
 
 	private static final SQLBiFunction<ResultSet, Integer, User> CreateUser = (rs, rowNum) -> {
 		return SQLUtils.newInstance(User.class, rs);

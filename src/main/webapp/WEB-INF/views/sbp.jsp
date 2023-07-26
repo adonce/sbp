@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	var AUTHENTICATION = angular.fromJson('${authentication}'); // ${authentication}의 값이 JSON 문자열이기 때문에 작은 따옴표로 문자열을 표기한다.
 	var APP_NAME = "sbp";
-	var pcl = angular.module(APP_NAME, [ "ui.bootstrap", "ngRoute", "ngResource", "ngAnimate", "ngSanitize", "ngFileUpload" ]);
+	var sbp = angular.module(APP_NAME, [ "ui.bootstrap", "ngRoute", "ngResource", "ngAnimate", "ngSanitize", "ngFileUpload" ]);
 	var __CSRF__ = {
 		headerName : '${_csrf.headerName}',
 		parameterName : '${_csrf.parameterName}',
@@ -254,7 +254,7 @@
 </style>
 
 </head>
-<body ng-controller="PclCtrl" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<body ng-controller="SbpCtrl" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
   <!-- header :S -->
   <div id="header">

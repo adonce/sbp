@@ -9,7 +9,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jsp"%>
 
 </head>
-<body ng-controller="PclCtrl" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="overflow: hidden;">
+<body ng-controller="SbpCtrl" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="overflow: hidden;">
 
   <!-- Header :S -->
   <div id="header">

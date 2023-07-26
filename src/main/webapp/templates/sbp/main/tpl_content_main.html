@@ -1,0 +1,21 @@
+<div id="contents" class="layer" ng-controller="MainCtrl" style="text-align: center;">
+  <h2>
+      <p>
+       <span style="font-size: 15px;"><span style="color:#c83a4c">(주)신호 입찰 프로젝트</span></span>
+      </p>
+  </h2>
+  <div>
+    <pre class="main_text" style="font-size: {{mainTextFontSize}}px">{{mainText}}</pre>
+  </div>
+  <div>
+    <img alt="" ng-src="{{getImage()}}" style="min-width: 970px;width: {{mainImageWidth}}%;">
+  </div>  
+  <!-- <a href="{{getImage()}}">다운로드</a> -->
+  <!-- masking :S -->
+  <div ng-if="!masking.loadingList.getFinished()" class="content_masking_loading">
+    <div class="container_masking_loading" style="width: max-content;">
+      <i class="fa fa-spinner fa-pulse fa-1x fa-fw" style="width: 50px; font-size: 0.9em;"></i> 정보를 불러오는 중입니다.
+    </div>
+  </div>
+  <!-- masking :E -->
+</div>

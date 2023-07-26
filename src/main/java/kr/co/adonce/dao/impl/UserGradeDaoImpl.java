@@ -15,7 +15,7 @@ import open.commons.utils.SQLUtils;
 @Repository(UserGradeDaoImpl.BEAN_QUALIFIER)
 public class UserGradeDaoImpl extends PostgreDbGenericDaoImpl implements IUserGradeDao {
 
-	public static final String BEAN_QUALIFIER = "kr.re.etri.iot.fcp.pcl.dao.impl.UserGradeDaoImpl";
+	public static final String BEAN_QUALIFIER = "kr.co.adonce.sbp.dao.impl.UserGradeDaoImpl";
 
 	private static final SQLBiFunction<ResultSet, Integer, UserGrade> CreateUserGrade = (rs, rowNum) -> {
 		return SQLUtils.newInstance(UserGrade.class, rs);

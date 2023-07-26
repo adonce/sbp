@@ -50,7 +50,7 @@
 		name="suffix" value=".jsp" /> </beans:bean> -->
 
 	<context:component-scan
-		base-package="kr.re.etri.iot.fcp.pcl" />
+		base-package="kr.co.adonce.sbp" />
 
 	<view-controller path="/j_security_check"
 		view-name="j_security_check" />

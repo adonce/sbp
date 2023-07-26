@@ -236,8 +236,9 @@ RouteWhen = function(templateUrl, controller, controllerAs, content) {
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑'Object for $routeProvider.when() function' JavaScript Object ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
+//// 수정예정
 // 왼쪽 메뉴 구성 템플릿
-//var tplPclContent = ctx + "/templates/pcl/tpl_content_menu_container.html";
+var tplSbpContent = ctx + "/templates/sbp/tpl_content_menu_container.html";
 
 ContentRouteConfig = function() {
 
