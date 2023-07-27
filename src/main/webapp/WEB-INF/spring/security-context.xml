@@ -19,13 +19,12 @@
 	<http pattern="/management/init-password/**" security="none" />
 	<http pattern="/common/upload" security="none" />
 	<http pattern="/subscription/listen" security="none" />
-
+	
 	<!-- services -->
 	<http pattern="/services/**" security="none" />
 
 	<http auto-config="true" disable-url-rewriting="true"
-		use-expressions="false"
-		entry-point-ref="CustomAuthenticationEntryPoint">
+		use-expressions="false" entry-point-ref="CustomAuthenticationEntryPoint">
 		<form-login login-page="/"
 			authentication-failure-url="/login?error=true"
 			authentication-success-handler-ref="authentication-success-handler"
@@ -40,11 +39,11 @@
 			<concurrency-control max-sessions="1"
 				error-if-maximum-exceeded="false" />
 		</session-management>
-
-		<csrf disabled="true" />
-		<csrf token-repository-ref="csrfTokenRepository" />
+		
+		<csrf disabled="true"/>
+		<csrf token-repository-ref="csrfTokenRepository"/>
 	</http>
-
+  
 	<authentication-manager>
 		<authentication-provider
 			ref="userAuthenticationProvider" />
@@ -56,26 +55,27 @@
 	</beans:bean>
 
 	<beans:bean id="userAuthenticationProvider"
-		class="kr.co.adonce.security.UserAuthenticationProvider">
+		class="kr.co.adonce.sbp.security.UserAuthenticationProvider">
 	</beans:bean>
 
 	<beans:bean id="authentication-success-handler"
-		class="kr.co.adonce.security.LoginAuthSuccessHandler">
+		class="kr.co.adonce.sbp.security.LoginAuthSuccessHandler">
 		<beans:property name="defaultTargetUrl" value="/"></beans:property>
 	</beans:bean>
 
 	<beans:bean id="authentication-failure-handler"
-		class="kr.co.adonce.security.LoginAuthFailureHandler">
+		class="kr.co.adonce.sbp.security.LoginAuthFailureHandler">
 		<beans:property name="defaultFailureUrl" value="/"></beans:property>
 	</beans:bean>
 
 	<beans:bean
-		class="kr.co.adonce.security.SBPFilterInvocationSecurityMetadataSourcePostProcessor">
+		class="kr.co.adonce.sbp.security.SBPFilterInvocationSecurityMetadataSourcePostProcessor">
 		<beans:property name="securityMetadataSource">
 			<beans:bean
-				class="kr.co.adonce.security.SBPFilterInvocationSecurityMetadataSource">
+				class="kr.co.adonce.sbp.security.SBPFilterInvocationSecurityMetadataSource">
 			</beans:bean>
 		</beans:property>
 	</beans:bean>
-
+	
+	<beans:bean id="CustomAuthenticationEntryPoint" class="kr.co.adonce.sbp.security.CustomAuthenticationEntryPoint"></beans:bean>
 </beans:beans>

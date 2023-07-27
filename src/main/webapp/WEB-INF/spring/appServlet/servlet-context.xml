@@ -40,7 +40,7 @@
 				</beans:bean>
 
 				<beans:bean
-					class="kr.co.adonce.view.resolver.JsonViewResolver"></beans:bean>
+					class="kr.co.adonce.sbp.view.resolver.JsonViewResolver"></beans:bean>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
