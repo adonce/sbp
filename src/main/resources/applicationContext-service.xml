@@ -13,7 +13,7 @@
 	http://www.springframework.org/schema/task
     http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
-	<!-- <context:property-placeholder location="classpath:resttemplate.properties" />
+	<context:property-placeholder location="classpath:resttemplate.properties" />
 	<context:component-scan base-package="kr.co.adonce.sbp.service" />
 
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
@@ -21,13 +21,13 @@
 			<bean class="org.springframework.http.client.SimpleClientHttpRequestFactory">
 				<property name="connectTimeout"
 					value="180000" />
-					value="${resttemplate.connectTimeout}" />
+					<!-- value="${resttemplate.connectTimeout}" /> -->
 				<property name="readTimeout"
 					value="180000" />
-					value="${resttemplate.readTimeout}" />
+					<!-- value="${resttemplate.readTimeout}" /> -->
 			</bean>
 		</property>
-	</bean> -->
+	</bean>
 	<task:annotation-driven />
 	
 </beans>
