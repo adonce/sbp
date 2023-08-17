@@ -22,7 +22,7 @@
  * @returns
  * 
  * @author jaehwankim
- * @since 2023. 07. 25
+ * @since 2023. 8. 17.
  */
 ContentMenu = function(key, templateUrl, display, desc, role, icon, standalone, shadow) {
 	this.key = key;
@@ -99,7 +99,7 @@ Content = function(content, userGrade) {
  *          {number} 사용자 등급
  * 
  * @author jaehwankim
- * @since 2023. 07. 25
+ * @since 2023. 8. 17.
  */
 Content.prototype.loadContents = function(content, userGrade) {
 	this.id = Object.getPropertyValue(content, "id", null); // Content ID
@@ -135,7 +135,7 @@ Content.prototype.loadContents = function(content, userGrade) {
  * @returns
  * 
  * @author jaehwankim
- * @since 2023. 07. 25.
+ * @since 2023. 8. 17.
  */
 Content.prototype.count = function() {
 	return this.menus.size();
@@ -144,10 +144,10 @@ Content.prototype.count = function() {
 /**
  * 메뉴의 개수를 반환한다.
  * 
- * @returns {Number}
+ * @returns
  * 
  * @author jaehwankim
- * @since 2023. 07. 25.
+ * @since 2023. 8. 17.
  */
 Content.prototype.countOfMenus = function() {
 
@@ -221,7 +221,7 @@ Content.prototype.updateCurrent = function(key) {
  * @returns
  * 
  * @author jaehwankim
- * @since 2023. 07. 25.
+ * @since 2023. 8. 17.
  */
 RouteWhen = function(templateUrl, controller, controllerAs, content) {
 	this.templateUrl = templateUrl;
@@ -236,7 +236,6 @@ RouteWhen = function(templateUrl, controller, controllerAs, content) {
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑'Object for $routeProvider.when() function' JavaScript Object ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-//// 수정예정
 // 왼쪽 메뉴 구성 템플릿
 var tplSbpContent = ctx + "/templates/sbp/tpl_content_menu_container.html";
 
@@ -244,37 +243,15 @@ ContentRouteConfig = function() {
 
 };
 
-////////////
-////////////
-//////////// 수정예정
-////////////
-////////////
 ContentRouteConfig.INVALID_CONTENT = -0x01;
-// 어플리케이션
-// ContentRouteConfig.APPLICATION = 0x00;
-// 데이터
-ContentRouteConfig.DATA = 0x00;
-// 소방시설 실시간 모니터링
-ContentRouteConfig.FRM = 0x01;
-// 서비스
-ContentRouteConfig.SERVICE = 0x02;
-// 구독
-ContentRouteConfig.SUBSCRIPTION = 0x03;
-// 권한
-ContentRouteConfig.PERMISSION = 0x04;
+// 분석
+ContentRouteConfig.ANALYSIS = 0x00;
 // 관리
 ContentRouteConfig.MANAGEMENT = 0x05;
-// 사용자 정보 수정
-ContentRouteConfig.MYINFO = 0x06;
-// 메인 화면
-ContentRouteConfig.MAIN = 0x07;
-
-
 // 관리자
 ContentRouteConfig.ROLE_ADMIN = 0x00;
 // 사용자
 ContentRouteConfig.ROLE_USER = 0x01;
-
 
 /**
  * 
@@ -284,14 +261,14 @@ ContentRouteConfig.ROLE_USER = 0x01;
  * <pre>
  * 	{
  * 		content: content url
- * 		, display: display text 
+ * 		, display: display text
  * 		, role: user role
  * 		, menus: 'ContentMenu' list
  * 	}
  * </pre>
  * 
  * @author jaehwankim
- * @since 2023. 07. 25.
+ * @since 2023. 8. 17
  */
 ContentRouteConfig.getContents = function(id) {
 
@@ -348,7 +325,7 @@ ContentRouteConfig.getContents = function(id) {
 			ContentRouteConfig.ROLE_USER //
 			],//
 			menus : [//
-				new ContentMenu("", ctx + "/templates/pcl/main/tpl_content_main.html"//
+				new ContentMenu("", ctx + "/templates/sbp/main/tpl_content_main.html"//
 				, "Main", "메인 화면을 표시합니다."//
 				, [ //
 				ContentRouteConfig.ROLE_ADMIN, //
@@ -358,12 +335,12 @@ ContentRouteConfig.getContents = function(id) {
 			],
 				icon : ""
 	};
-		// 데이터
-	case ContentRouteConfig.DATA:
+		// 분석
+	case ContentRouteConfig.ANALYSIS:
 		return {
-			id : ContentRouteConfig.DATA,//
-			content : "faci",//
-			display : "FACI",//
+			id : ContentRouteConfig.ANALYSIS,//
+			content : "analysis",//
+			display : "ANALYSIS",//
 			role : [ // 
 			ContentRouteConfig.ROLE_ADMIN, //
 			ContentRouteConfig.ROLE_USER //
@@ -380,113 +357,6 @@ ContentRouteConfig.getContents = function(id) {
 			icon : ""
 		};
 		
-		// 소방시설 실시간 모니터링
-	case ContentRouteConfig.FRM:
-		return {
-		id : ContentRouteConfig.FRM,//
-		content : "frm",//
-		display : "Realtime Monitoring",//
-		role : [ //
-			ContentRouteConfig.ROLE_ADMIN, //
-			ContentRouteConfig.ROLE_USER //
-			],//
-			menus : [//
-//				new ContentMenu("", ctx + "/templates/pcl/frm/tpl_content_realtime_monitoring.html"//
-//						, "실시간 모니터링", "실시간 모니터링 데이터를 관리합니다."//
-//						, [ //
-//							ContentRouteConfig.ROLE_ADMIN, //
-//							ContentRouteConfig.ROLE_USER //
-//							]//
-//				, "", false, false) //
-				],
-				icon : ""
-	};
-
-		// 서비스
-	case ContentRouteConfig.SERVICE:
-		return {
-			id : ContentRouteConfig.SERVICE,//
-			content : "service",//
-			display : "Service",//
-			role : [ //
-			ContentRouteConfig.ROLE_ADMIN, //
-			ContentRouteConfig.ROLE_USER //
-			],//
-			menus : [//
-				new ContentMenu("", ctx + "/templates/pcl/service/tpl_content_service.html"//
-				, "Service", "서비스를 관리합니다."//
-				, [ //
-				ContentRouteConfig.ROLE_ADMIN, //
-				ContentRouteConfig.ROLE_USER //
-				]//
-				, "", false, false) //
-			],
-			icon : ""
-		};
-
-		// 구독
-	case ContentRouteConfig.SUBSCRIPTION:
-		return {
-			id : ContentRouteConfig.SUBSCRIPTION,//
-			content : "subscription",//
-			display : "Subscription",//
-			role : [ // 
-			ContentRouteConfig.ROLE_ADMIN, //
-			ContentRouteConfig.ROLE_USER //
-			],//
-			menus : [//
-			new ContentMenu("app", ctx + "/templates/pcl/subscription/tpl_content_subscription_app.html"//
-			, "Application", "App 구독정보를 관리합니다."//
-			, [ // 
-			ContentRouteConfig.ROLE_ADMIN, //
-			ContentRouteConfig.ROLE_USER //
-			]//
-			, "", false, false), //
-			new ContentMenu("data", ctx + "/templates/pcl/subscription/tpl_content_subscription_data.html"//
-			, "Data", "Data 구독정보를 관리합니다."//
-			, [ // 
-			ContentRouteConfig.ROLE_ADMIN, //
-			ContentRouteConfig.ROLE_USER //
-			]//
-			, "", false, false) ],
-			icon : ""
-		};
-
-		// 권한
-	case ContentRouteConfig.PERMISSION:
-		return {
-			id : ContentRouteConfig.PERMISSION,//
-			content : "permission",//
-			display : "Permission",//
-			role : [ // 
-			ContentRouteConfig.ROLE_ADMIN, //
-			ContentRouteConfig.ROLE_USER //
-			],//
-			menus : [//
-			new ContentMenu("authorization", ctx + "/templates/pcl/permission/tpl_content_permission.html"//
-			, "Authorization", "권한 신청을 및 확인을 합니다."//
-			, [ // 
-			ContentRouteConfig.ROLE_ADMIN, //
-			ContentRouteConfig.ROLE_USER //
-			]//
-			, "", false, false), //
-//			new ContentMenu("service", ctx + "/templates/pcl/permission/tpl_content_service.html"//
-//			, "Service", "서비스 권한 신청 및 확인을 합니다."//
-//			, [ // 
-//			ContentRouteConfig.ROLE_ADMIN, //
-//			ContentRouteConfig.ROLE_USER //
-//			]//
-//			, "", false, false), //
-			new ContentMenu("token", ctx + "/templates/pcl/permission/tpl_content_permission_token.html"//
-			, "Token", "권한에 대한 토큰 신청 및 확인을 합니다."//
-			, [ // 
-			ContentRouteConfig.ROLE_ADMIN, //
-			ContentRouteConfig.ROLE_USER //
-			]//
-			, "", false, false) ],
-			icon : ""
-		};
-
 		// 관리
 	case ContentRouteConfig.MANAGEMENT:
 		return {
@@ -497,40 +367,13 @@ ContentRouteConfig.getContents = function(id) {
 			ContentRouteConfig.ROLE_ADMIN //
 			],//
 			menus : [//
-					new ContentMenu("api", ctx + "/templates/pcl/management/tpl_content_management_api.html"//
-					, "API", "API를 매핑, 관리합니다."//
-					, [ // 
-					ContentRouteConfig.ROLE_ADMIN //
-					]//
-					, "", false, false), //
-					new ContentMenu("application", ctx
-							+ "/templates/pcl/management/application/tpl_content_management_application.html"//
-					, "Application", "어플리케이션을 관리합니다."//
-					, [ // 
-					ContentRouteConfig.ROLE_ADMIN, //
-					]//
-					, "", false, false), //
-					new ContentMenu("datasource", ctx + "/templates/pcl/management/tpl_content_management_datasource.html" //
-					, "Data Source", "Data Source를 매핑, 관리합니다." //
-					, [ ContentRouteConfig.ROLE_ADMIN //
-					] //
-					, "", false, false), //
-//					new ContentMenu("service", ctx + "/templates/pcl/management/service/tpl_content_management_service.html" //
-//					, "Service", "Service를 매핑, 관리합니다." //
-//					, [ ContentRouteConfig.ROLE_ADMIN //
-//					] //
-//					, "", false, false), //
-					new ContentMenu("system", ctx + "/templates/pcl/management/system/tpl_content_management_system.html" //
+					new ContentMenu("system", ctx + "/templates/sbp/management/system/tpl_content_management_system.html" //
 					, "System", "시스템 설정 정보에 대한 관리를 합니다." //
 					, [ ContentRouteConfig.ROLE_ADMIN //
 					] //
 					, "", false, false),
-					new ContentMenu("permission", ctx + "/templates/pcl/management/tpl_content_management_permission.html" //
-					, "Permission", "Permission 요청에 대한 관리를 합니다." //
-					, [ ContentRouteConfig.ROLE_ADMIN //
-					] //
-					, "", false, false), //
-					new ContentMenu("user", ctx + "/templates/pcl/management/user/tpl_content_management_user.html" //
+					
+					new ContentMenu("user", ctx + "/templates/sbp/management/user/tpl_content_management_user.html" //
 					, "User", "사용자 관리를 합니다." //
 					, [ ContentRouteConfig.ROLE_ADMIN //
 					] //
@@ -538,25 +381,8 @@ ContentRouteConfig.getContents = function(id) {
 			],
 			icon : ""
 		};
-		
-	// 사용자 정보 수정
-	case ContentRouteConfig.MYINFO:
-		return {
-			id : ContentRouteConfig.MYINFO,
-			content : "myinfo",
-			display : "사용자 정보 수정",
-			role : [ ContentRouteConfig.ROLE_ADMIN, ContentRouteConfig.ROLE_USER, ContentRouteConfig.ROLE_OPERATOR ],
-			menus : [ new ContentMenu("", ctx + "/templates/pcl/management/user/tpl_content_user_info.html"//
-			, "사용자 정보 수정 ", "사용자 정보를 수정합니다."//
-			, [ ContentRouteConfig.ROLE_ADMIN, ContentRouteConfig.ROLE_USER, ContentRouteConfig.ROLE_OPERATOR ],
-					"glyphicon glyphicon-cog", false, false) //
-
-			],
-			icon : ""
-		};
 	}
-	;
-
+	;q
 };
 
 // ////////////////////////////////////////////////////////////////////////////
@@ -577,7 +403,7 @@ ContentRouteConfig.loadRoute = function(contentId, userGrade) {
 
 	};
 
-	return new RouteWhen(tplPclContent, ServiceContentCtrl, "menuContainer", menuconfig);
+	return new RouteWhen(tplSbpContent, ServiceContentCtrl, "menuContainer", menuconfig);
 }
 
 /**
@@ -594,7 +420,7 @@ ContentRouteConfig.loadRouteExt = function(content, userGrade) {
 		return content;
 	};
 	
-	return new RouteWhen(tplPclContent, ServiceContentCtrl, "menuContainer", menuconfig);
+	return new RouteWhen(tplSbpContent, ServiceContentCtrl, "menuContainer", menuconfig);
 }
 
 ContentRouteConfig.loadRouteExt2 = function(content, userGrade) {
@@ -603,7 +429,7 @@ ContentRouteConfig.loadRouteExt2 = function(content, userGrade) {
 		return content;
 	};
 	
-	return new RouteWhen(tplPclContent, ServiceContentCtrl, "menuContainer", menuconfig);
+	return new RouteWhen(tplSbpContent, ServiceContentCtrl, "menuContainer", menuconfig);
 }
 
 // /// end - FCP-PCL 서비스
@@ -616,7 +442,7 @@ ContentRouteConfig.loadRouteExt2 = function(content, userGrade) {
  * @returns {RouteWhen}
  * 
  * @author jaehwankim
- * @since 2023. 07. 25.
+ * @since 2023. 8. 17.
  */
 ContentRouteConfig.loadInvalidUrlRoute = function() {
 	var menuconfig = function() {
@@ -626,5 +452,5 @@ ContentRouteConfig.loadInvalidUrlRoute = function() {
 		return cmc;
 	};
 
-	return new RouteWhen(tplPclContent, ServiceContentCtrl, "menuContainer", menuconfig);
+	return new RouteWhen(tplSbpContent, ServiceContentCtrl, "menuContainer", menuconfig);
 };

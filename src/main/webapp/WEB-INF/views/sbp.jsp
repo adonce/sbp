@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	var AUTHENTICATION = angular.fromJson('${authentication}'); // ${authentication}의 값이 JSON 문자열이기 때문에 작은 따옴표로 문자열을 표기한다.
 	var APP_NAME = "sbp";
-	var sbp = angular.module(APP_NAME, [ "ui.bootstrap", "ngRoute", "ngResource", "ngAnimate", "ngSanitize", "ngFileUpload" ]);
+	var sbp = angular.module(APP_NAME, [ "ui.bootstrap", "ngRoute", "ngResource", "ngAnimate", "ngSanitize" ]);
 	var __CSRF__ = {
 		headerName : '${_csrf.headerName}',
 		parameterName : '${_csrf.parameterName}',
@@ -20,99 +20,19 @@
 </script>
 <script type="text/javascript" src="${ctx}/scripts/ctrl/ng-support.js"></script>
 <script type="text/javascript" src="${ctx}/scripts/ctrl/contents_menu_config.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/ctrl_content_menu_container.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/ctrl_content_menu_container.js"></script>
 
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/ftr_pcl.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/res_pcl.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/ctrl_pcl.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/ftr_sbp.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/res_sbp.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/ctrl_sbp.js"></script>
 
 
 
 <!-- Main: S -->
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/main/ctrl_main.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/main/ctrl_main.js"></script>
 <!-- Main: E -->
 
-<!-- Application: S -->
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/application/ftr_application.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/application/ctrl_application.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/application/dlg_regist_application.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/application/dlg_modify_application.js"></script>
-<!-- Application: E -->
-
-<!-- FACI: S -->
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/faci/ftr_faci.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/faci/res_faci.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/faci/ctrl_faci.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/faci/dlg_view_detail_faci.js"></script>
-<!-- FACI: E -->
-
-<!-- FACI DATA: S -->
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/faci/dlg_real_sensing_equip.js"></script>
-<!-- FACI DATA: E -->
-
-<!-- Subscription: S -->
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/subscription/ftr_subscription.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/subscription/res_subscription.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/subscription/ctrl_subscription_app.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/subscription/ctrl_subscription_data.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/subscription/dlg_add_subscription.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/subscription/dlg_subscription_data_detail.js"></script>
-<!-- Subscription: E -->
-
-<!-- Realtime Monitoring: S -->
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/frm/ftr_frm.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/frm/res_frm.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/frm/ctrl_frm_sensing_equip_info.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/frm/ctrl_frm_sensing_info.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/frm/ctrl_frm_event_info.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/frm/dlg_reg_sensing_equip_info.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/frm/dlg_mod_sensing_equip_info.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/frm/dlg_detail_info.js"></script>
-<!-- Realtime Monitoring: E -->
-
-<!-- Service: S -->
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/service/res_service.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/service/ctrl_service.js"></script>
-<!-- Service: E -->
-
-<!-- Permission: S -->
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/permission/ftr_permission.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/permission/res_permission.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/permission/ctrl_permission.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/permission/ctrl_permission_token.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/permission/dlg_regist_token.js"></script>
-<!-- Permission: E -->
-
 <!-- Management: S -->
-
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/ftr_api.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/ctrl_management_api.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/dlg_regist_api.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/dlg_modify_api.js"></script>
-
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/ftr_datasource.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/ctrl_management_datasource.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/dlg_regist_datasource.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/dlg_modify_datasource.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/dlg_view_subscr_column.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/dlg_view_datasource.js"></script>
-
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/user/ftr_user.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/dlg_api_detail.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/ctrl_management_permission.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/user/ctrl_management_user.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/user/ctrl_user_info.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/user/dlg_modify_user.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/res_management.js"></script>
-
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/service/ftr_service.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/service/ctrl_management_service.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/service/dlg_regist_service.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/service/dlg_modify_service.js"></script>
-
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/system/ctrl_management_system.js"></script>
-<script type="text/javascript" src="${ctx}/scripts/ctrl/pcl/management/system/res_system.js"></script>
-
 
 <!-- Management: E -->
 
@@ -120,7 +40,7 @@
 .sub_menu_icon_collapse {
   background: url(../images/icon_menu_on.png) no-repeat 0px 5px;
   width:16px;
-  display:inline-block;
+  display:inline-block;                                                 
   cursor: pointer;
   margin-left: 5px;
 }
@@ -132,7 +52,7 @@
   margin-left: 5px;
 }
 
-.faci_li {
+.analysis_li {
   padding-left:10px !important;
   /* overflow: hidden;
   white-space: nowrap;
@@ -155,7 +75,7 @@
   color: white !important;
 }
 
-.faci_sub_menu_div {
+.analysis_sub_menu_div {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -164,7 +84,7 @@
   /* background: url(../images/icon_menu02_on.png) no-repeat 0px 1px; */
 }
 
-.faci_sub_menu_div:hover {
+.analysis_sub_menu_div:hover {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -173,22 +93,22 @@
   /* background: url(../images/icon_menu02_on.png) no-repeat 0px -29px; */
 }
 
-.faci_sub_menu_a {
+.analysis_sub_menu_a {
   background: url(../images/icon_menu02_on.png) no-repeat 5px 4px !important;
 }
 
-.faci_sub_menu_a:hover {
+.analysis_sub_menu_a:hover {
   background: url(../images/icon_menu02_on.png) no-repeat 5px -25px !important;
 }
 
-.left_menu_faci {
+.left_menu_analysis {
   /* overflow-x: hidden;
   overflow-y: auto; */
   /* overflow: auto; */
   overflow: overlay;
 }
 
-/* .left_menu_faci::-webkit-scrollbar {
+/* .left_menu_analysis::-webkit-scrollbar {
   display: none;
 } */
 
@@ -260,7 +180,7 @@
   <div id="header">
     <div class="layer">
       <h1>
-        <a href="${ctx}/#/"><img src="${ctx}/images/logo.png" alt="소방활동융합정보플랫폼 [ETRI]" border="0"></a>
+        <a href="${ctx}/#/"><img src="${ctx}/images/logo.png" alt="(주)신호 입찰 프로젝트" border="0"></a>
       </h1>
       <!-- header_btn : S -->
       <div class="topmenu">
@@ -284,37 +204,37 @@
             <a ng-if="!routeContent.standalone" href="{{routeContent.getUrl(false)}}" ng-click="clickMenu(routeContent)"> 
               {{routeContent.display}}
             </a> 
-            <span ng-if="routeContent.content == 'faci'" style="cursor:pointer;">
+            <span ng-if="routeContent.content == 'analysis'" style="cursor:pointer;">
               <i class="fa fa-plus-square clickable" ng-click="allExpand(true)" title="전체 열기"></i>
               <i class="fa fa-minus-square clickable" ng-click="allExpand(false)" title="전체 닫기"></i>
             </span> 
             <a ng-if="routeContent.standalone" href="" ng-click="handleStandalone(routeContent.content, routeContent.menus.values()[0].key, routeContent.menus.values()[0].templateUrl)">
                 {{routeContent.display}}
             </a>
-            <ul id="{{routeContent.content}}" class="bubble left_menu_faci" ng-if="routeContent.countOfMenus() > 0" style="max-height: calc(100% - 450px);">
+            <ul id="{{routeContent.content}}" class="bubble left_menu_analysis" ng-if="routeContent.countOfMenus() > 0" style="max-height: calc(100% - 450px);">
               <div class="pointer"></div>
               <li ng-repeat="menu in routeContent.menus.values()" ng-if="!menu.shadow && isAllowedSubmenu(menu)">
                 <div class="menu_style clickable" style="width: 195px;"ng-click="collapseGroup(menu);moveLocation(routeContent.content, '/' + routeContent.content + '/' + menu.key);clickMenu(routeContent, menu);">
-                  <div class="sub_menu_icon_expand" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.collapse && routeContent.content == 'faci'">&nbsp</div>
-                  <div class="sub_menu_icon_collapse" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="menu.collapse || routeContent.content != 'faci'">&nbsp</div>
-                  <!-- <div class="sub_menu_icon_collapse" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="menu.collapse || routeContent.content != 'faci' && !menu.selected">&nbsp</div>
-                  <div class="sub_menu_icon_expand" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="menu.selected && routeContent.content != 'faci'">&nbsp</div> -->
+                  <div class="sub_menu_icon_expand" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.collapse && routeContent.content == 'analysis'">&nbsp</div>
+                  <div class="sub_menu_icon_collapse" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="menu.collapse || routeContent.content != 'analysis'">&nbsp</div>
+                  <!-- <div class="sub_menu_icon_collapse" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="menu.collapse || routeContent.content != 'analysis' && !menu.selected">&nbsp</div>
+                  <div class="sub_menu_icon_expand" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="menu.selected && routeContent.content != 'analysis'">&nbsp</div> -->
                   <!-- <div class="left_menu_div" ng-if="!menu.standalone" style="padding-left: 2px;">{{menu.display}}</div> -->
                   <div class="left_menu_div" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.standalone && (menu.display != '공통' && menu.display != '융합')" style="padding-left: 2px;">{{menu.display}}</div>
                   <div class="left_menu_div" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.standalone && menu.display == '공통'" style="color: #e25a5a !important; padding-left: 2px;">{{menu.display}}</div>
                   <div class="left_menu_div" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.standalone && menu.display == '융합'" style="color: #20bb20 !important; padding-left: 2px;">{{menu.display}}</div>
                 </div>
-                <!-- <a ng-if="routeContent.content != 'faci' && !menu.standalone" href="{{routeContent.getUrl(menu.standalone)}}/{{menu.key}}" ng-click="clickMenu(routeContent, menu)" style="padding-left: 2px;">{{menu.display}}</a> -->
+                <!-- <a ng-if="routeContent.content != 'analysis' && !menu.standalone" href="{{routeContent.getUrl(menu.standalone)}}/{{menu.key}}" ng-click="clickMenu(routeContent, menu)" style="padding-left: 2px;">{{menu.display}}</a> -->
                 <a ng-if="menu.standalone" href=""
                 ng-click="handleStandalone(routeContent.content, menu.key, menu.templateUrl)">{{menu.display}}</a>
                 
-                <!-- FACI > Data > 각 Table -->
-                <ul ng-if="!menu.collapse && routeContent.content == 'faci'">
-                  <li class="submenu faci_li" ng-repeat="tbMenu in menu.menus track by $index" ng-if="isAllowedContent(tbMenu)" >
+                <!-- analysis > Data > 각 Table -->
+                <ul ng-if="!menu.collapse && routeContent.content == 'analysis'">
+                  <li class="submenu analysis_li" ng-repeat="tbMenu in menu.menus track by $index" ng-if="isAllowedContent(tbMenu)" >
                     <div class="menu_style clickable">
-                      <!-- <img alt="" src="../images/faci_sub_meu_icon.png" style="width:15px;height:15px;top: 0;position: relative;margin-left: 5px;"/> -->
-                      <a class="faci_sub_menu_a" style="width:100%;" ng-if="!tbMenu.standalone" href="{{routeContent.getUrl(menu.standalone)}}/{{menu.key}}/{{tbMenu.id}}" ng-click="clickMenu(routeContent, menu, tbMenu)">
-                        <div class="faci_sub_menu_div" title="{{tbMenu.display}}" ng-class="tbMenu.selected ? 'selected_menu' : ''" style="padding-left:20px;">
+                      <!-- <img alt="" src="../images/analysis_sub_meu_icon.png" style="width:15px;height:15px;top: 0;position: relative;margin-left: 5px;"/> -->
+                      <a class="analysis_sub_menu_a" style="width:100%;" ng-if="!tbMenu.standalone" href="{{routeContent.getUrl(menu.standalone)}}/{{menu.key}}/{{tbMenu.id}}" ng-click="clickMenu(routeContent, menu, tbMenu)">
+                        <div class="analysis_sub_menu_div" title="{{tbMenu.display}}" ng-class="tbMenu.selected ? 'selected_menu' : ''" style="padding-left:20px;">
                           {{tbMenu.display}}
                         </div>
                       </a> 
@@ -324,10 +244,10 @@
                 </ul>
                 <!-- 실시간 모니터링 > Data > 각 Table -->
                 <ul ng-if="!menu.collapse && routeContent.content == 'frm'">
-                  <li class="submenu faci_li" ng-repeat="tbMenu in menu.menus track by $index" ng-if="isAllowedContent(tbMenu)" >
+                  <li class="submenu analysis_li" ng-repeat="tbMenu in menu.menus track by $index" ng-if="isAllowedContent(tbMenu)" >
                     <div class="menu_style clickable">
-                      <a class="faci_sub_menu_a" style="width:100%;" ng-if="!tbMenu.standalone" href="{{routeContent.getUrl(menu.standalone)}}/{{menu.key}}/{{tbMenu.id}}" ng-click="clickMenu(routeContent, menu, tbMenu)">
-                        <div class="faci_sub_menu_div" title="{{tbMenu.display}}" ng-class="tbMenu.selected ? 'selected_menu' : ''" style="padding-left:20px;">
+                      <a class="analysis_sub_menu_a" style="width:100%;" ng-if="!tbMenu.standalone" href="{{routeContent.getUrl(menu.standalone)}}/{{menu.key}}/{{tbMenu.id}}" ng-click="clickMenu(routeContent, menu, tbMenu)">
+                        <div class="analysis_sub_menu_div" title="{{tbMenu.display}}" ng-class="tbMenu.selected ? 'selected_menu' : ''" style="padding-left:20px;">
                           {{tbMenu.display}}
                         </div>
                       </a> 

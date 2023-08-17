@@ -74,7 +74,7 @@ sbp.controller("SbpCtrl",
 			$rootScope.logger = new NgLogger("debug");
 
 			if ($rootScope.logger.isDebuggable()) {
-				console.log("[Controller] Here comes a 소방융합활동정보 at", new Date());
+				console.log("[Controller] Here comes a  (주)신호 입찰 프로젝트 at", new Date());
 			}
 
 			$scope.authentication = new Authentication(AUTHENTICATION);
@@ -94,241 +94,15 @@ sbp.controller("SbpCtrl",
 
 			$scope.routeContents = [
 			// new Content(ContentRouteConfig.getContents(ContentRouteConfig.APPLICATION)),
-			new Content(ContentRouteConfig.getContents(ContentRouteConfig.DATA)),
+			/*new Content(ContentRouteConfig.getContents(ContentRouteConfig.DATA)),
 				new Content(ContentRouteConfig.getContents(ContentRouteConfig.FRM)),
 					new Content(ContentRouteConfig.getContents(ContentRouteConfig.SERVICE)),
 					new Content(ContentRouteConfig.getContents(ContentRouteConfig.SUBSCRIPTION)),
-					new Content(ContentRouteConfig.getContents(ContentRouteConfig.PERMISSION)),
+					new Content(ContentRouteConfig.getContents(ContentRouteConfig.PERMISSION)),*/
+					new Content(ContentRouteConfig.getContents(ContentRouteConfig.ANALYSIS)),
 					new Content(ContentRouteConfig.getContents(ContentRouteConfig.MANAGEMENT)) ];
 
-			// FACI 그룹 목록
-			var faciGroup = [];
-			// 실시간 모니터링 그룹 목록
-			var frmroup = [];
 
-			/**
-			 * FACI 하위 메뉴 목록 제공
-			 */
-			var getTableGroupAndTable = function() {
-
-				SbpManager.getTableGroupAndTable({
-					param1 : "faci",
-					param2 : "group"
-				},
-				// on-success
-				function(response, header) {
-
-					console.debug("FACI 하위 메뉴 목록 제공 Response: ", response);
-
-					faciGroup = response.data;
-
-					faciGroup.forEach(function(group) {
-
-						group.collapse = true;
-
-					});
-					// 그룹에 대한 테이블 목록 순서대로 정렬
-					faciGroup.forEach(function(group) {
-						group.tables.sort(function(a, b) {
-							return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; 
-						});
-					});
-
-					addFaciMenu();
-				},
-				// on-error
-				function(response) {
-
-					alert("FACI 하위 메뉴 목록 제공 실패!");
-				});
-			};
-
-			getTableGroupAndTable();
-
-			/**
-			 * 실시간 모니터링 하위 메뉴 목록 제공
-			 */
-			var getFrmTableGroupAndTable = function() {
-				
-				SbpManager.getFrmTableGroupAndTable({
-					param1 : "frm",
-					param2 : "group"
-				},
-				// on-success
-				function(response, header) {
-
-					console.debug("실시간 모니터링 하위 메뉴 목록 제공 Response: ", response);
-
-					frmGroup = response.data;
-
-					frmGroup.forEach(function(group) {
-
-						group.collapse = true;
-
-					});
-					// 그룹에 대한 테이블 목록 순서대로 정렬
-					frmGroup.forEach(function(group) {
-						group.tables.sort(function(a, b) {
-							return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; 
-						});
-					});
-
-					addFrmMenu();
-				},
-				// on-error
-				function(response) {
-					alert("실시간 모니터링 하위 메뉴 목록 제공 실패!");
-				});
-				
-			};
-			
-			getFrmTableGroupAndTable();
-			
-			// FACI 하위 메뉴 추가
-			var addFaciMenu = function() {
-
-				var contentMenu = null;
-				var content = null;
-
-				$scope.routeContents.forEach(function(routeContent) {
-
-					if (routeContent.content == "faci") {
-
-						faciGroup.forEach(function(group) {
-
-							contentMenu = new ContentMenu(group.id, ctx + "/templates/sbp/data/tpl_content_data.html"//
-							, group.name, group.name//
-							, [ //
-							ContentRouteConfig.ROLE_ADMIN, //
-							ContentRouteConfig.ROLE_USER //
-							]//
-							, "", false, false) //
-
-							group.tables.forEach(function(table) {
-
-								content = new Content({
-									id : table.id,//
-									content : table.id,//
-									display : table.name,//
-									role : [ // 
-									ContentRouteConfig.ROLE_ADMIN, //
-									ContentRouteConfig.ROLE_USER //
-									],//
-									menus : [//
-									new ContentMenu("", ctx + "/templates/sbp/faci/tpl_content_faci.html" //
-									, "소방융합정보를 관리합니다.", "소방융합정보를 관리합니다." //
-									, [ ContentRouteConfig.ROLE_ADMIN //
-									, ContentRouteConfig.ROLE_USER //
-									] //
-									, "", true, false) //
-									],
-									icon : ""
-								});
-
-								contentMenu.addSubMenu(content);
-//								routeProviderReference.when("/", ContentRouteConfig.loadRouteExt(content));
-//								routeProviderReference.when("/faci", ContentRouteConfig.loadRouteExt(content));
-								routeProviderReference.when("/faci/:table_group", ContentRouteConfig.loadRouteExt(content));
-								routeProviderReference.when("/faci/:table_group/:table", ContentRouteConfig.loadRouteExt(content));
-							});
-
-							routeContent.menus.put(group.id, contentMenu);
-						});
-					}
-
-				});
-
-//				$rootScope.load_menu.path = [];
-//				$rootScope.load_menu.path.push("FACI");
-//				$rootScope.load_menu.path.push("공간");
-//				$rootScope.load_menu.path.push("POI 정보");
-
-				$location.url("/");
-				
-				$scope.routeContents.forEach(function(routeContent) {
-
-					if (routeContent.content != "faci") {
-						return;
-					}
-
-					routeContent.menus.values().forEach(function(group) {
-						group.collapse = true;
-					});
-				});
-
-			};
-			
-			// 실시간 모니터링 하위 메뉴 추가
-			var addFrmMenu = function() {
-
-				var contentMenu = null;
-				var content = null;
-
-				$scope.routeContents.forEach(function(routeContent) {
-
-					if (routeContent.content == "frm") {
-
-						frmGroup.forEach(function(group) {
-
-							contentMenu = new ContentMenu(group.id, ctx + "/templates/sbp/frm/tpl_content_sensing_equip_info.html"//
-							, group.name, group.name//
-							, [ //
-							ContentRouteConfig.ROLE_ADMIN, //
-							ContentRouteConfig.ROLE_USER //
-							]//
-							, "", false, false) //
-
-							group.tables.forEach(function(table) {
-								
-								content = new Content({
-									id : table.id,//
-									content : table.id,//
-									display : table.name,//
-									role : [ // 
-									ContentRouteConfig.ROLE_ADMIN, //
-									ContentRouteConfig.ROLE_USER //
-									],//
-									menus : [//
-									new ContentMenu(table.id, ctx + "/templates/sbp/frm/tpl_content_" + table.id + ".html" //
-									, table.name + " 관리합니다.", table.name + " 관리합니다." //
-									, [ ContentRouteConfig.ROLE_ADMIN //
-									, ContentRouteConfig.ROLE_USER //
-									] //
-									, "", true, false) //
-									],
-									icon : ""
-								});
-
-								contentMenu.addSubMenu(content);
-//								routeProviderReference.when("/frm", ContentRouteConfig.loadRouteExt2(content));
-//								routeProviderReference.when("/frm/:table_group", ContentRouteConfig.loadRouteExt2(content));
-//								routeProviderReference.when("/frm/:table_group/:table", ContentRouteConfig.loadRouteExt2(content));
-								routeProviderReference.when("/frm", ContentRouteConfig.loadRouteExt2(content));
-								routeProviderReference.when("/frm/".concat(group.id, "/", table.id), ContentRouteConfig.loadRouteExt2(content));
-								
-							});
-							routeContent.menus.put(group.id, contentMenu);
-							
-						});
-					}
-
-				});
-
-				$location.url("/");
-				
-				$scope.routeContents.forEach(function(routeContent) {
-
-					if (routeContent.content != "frm") {
-						return;
-					}
-
-					routeContent.menus.values().forEach(function(group) {
-						group.collapse = true;
-					});
-				});
-
-			};
-			
 			// 메뉴 노출
 			$scope.isAllowedContent = function(content) {
 				if ($rootScope.logger.isTraceable()) {
@@ -526,45 +300,18 @@ sbp.config(function($routeProvider, $locationProvider) {
 
 	var routeWhen = null;
 
-	// routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.APPLICATION);
-	// $routeProvider.when("/", routeWhen);
-	// $routeProvider.when("/application", routeWhen);
-	// $routeProvider.when("/application/:content_id", routeWhen);
-
 	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.MAIN);
 	$routeProvider.when("/", routeWhen);
-	$routeProvider.when("/faci", routeWhen);
+	$routeProvider.when("/sbp", routeWhen);
 	$routeProvider.when("/main", routeWhen);
 	$routeProvider.when("/main/:content_id", routeWhen);
 	
-	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.DATA);
-	// $routeProvider.when("/faci", routeWhen);
-	// $routeProvider.when("/faci/:content_id", routeWhen);
-	
-	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.FRM);
-//	$routeProvider.when("/frm", routeWhen);
-//	$routeProvider.when("/frm/:content_id", routeWhen);
-
-	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.SERVICE);
-	$routeProvider.when("/service", routeWhen);
-	$routeProvider.when("/service/:content_id", routeWhen);
-
-	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.SUBSCRIPTION);
-	$routeProvider.when("/subscription", routeWhen);
-	$routeProvider.when("/subscription/:content_id", routeWhen);
-
-	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.PERMISSION);
-	$routeProvider.when("/permission", routeWhen);
-	$routeProvider.when("/permission/:content_id", routeWhen);
+	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.ANALYSIS);
 
 	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.MANAGEMENT);
 	$routeProvider.when("/management", routeWhen);
 	$routeProvider.when("/management/:content_id", routeWhen);
 
-	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.MYINFO);
-	$routeProvider.when("/myinfo", routeWhen);
-	$routeProvider.when("/myinfo/:content_id", routeWhen);
-	
 	// ////////////////////////////////////////////////////////////////////////////
 	// start - Route for 'Unknown URL Request' : 2016. 2. 24., Park_Jun_Hong_(fafanmama_at_naver_com)
 	routeWhen = ContentRouteConfig.loadInvalidUrlRoute();
