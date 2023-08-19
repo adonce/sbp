@@ -233,3 +233,8 @@
 .first_style {
   border-top: 1px solid #ddd;
 }
+
+.main_title {
+	height: 75px;
+    width: 320px
+}

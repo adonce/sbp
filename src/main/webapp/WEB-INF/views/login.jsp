@@ -89,7 +89,7 @@
 
         <div class="login_area">
           <h1>
-            <img src="images/title_login.png">
+            <img class="main_title" src="images/bg_shinho_title.png">
           </h1>
           <!--div class="l_intro">환영합니다.</div-->
           <ul>
