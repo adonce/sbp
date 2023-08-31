@@ -246,6 +246,8 @@ ContentRouteConfig = function() {
 ContentRouteConfig.INVALID_CONTENT = -0x01;
 // 분석
 ContentRouteConfig.ANALYSIS = 0x00;
+// 테스트메뉴(삭제예정)
+ContentRouteConfig.NEWMENU = 0x01;
 // 관리
 ContentRouteConfig.MANAGEMENT = 0x05;
 // 관리자
@@ -346,23 +348,46 @@ ContentRouteConfig.getContents = function(id) {
 			ContentRouteConfig.ROLE_USER //
 			],//
 			menus : [//
-//			new ContentMenu("spatial", ctx + "/templates/pcl/data/tpl_content_data.html"//
-//			, "공간 정보", "공간 정보"//
-//			, [ //
-//				ContentRouteConfig.ROLE_ADMIN, //
-//				ContentRouteConfig.ROLE_USER //
-//				]//
-//			, "", false, false) //			
+				new ContentMenu("bidding", ctx + "/templates/sbp/analysis/bidding/tpl_content_analysis_bidding.html" //
+					, "Bidding", "입찰 정보를 표시합니다." //
+					, [ ContentRouteConfig.ROLE_ADMIN, ContentRouteConfig.ROLE_USER  //
+					] //
+					, "", false, false) //
 			],
 			icon : ""
 		};
 		
+		// 테스트메뉴
+	case ContentRouteConfig.NEWMENU:
+		return {
+			id : ContentRouteConfig.NEWMENU,//
+			content : "newmenu",//
+			display : "NewMenu",//
+			role : [ // 
+			ContentRouteConfig.ROLE_ADMIN, //
+			ContentRouteConfig.ROLE_USER //
+			],//
+			menus : [//
+					new ContentMenu("newmenu1", ctx + "/templates/sbp/management/system/tpl_content_management_system.html" //
+					, "NewMenu1", "시스템 설정 정보에 대한 관리를 합니다." //
+					, [ ContentRouteConfig.ROLE_ADMIN //
+					] //
+					, "", false, false),
+					
+					new ContentMenu("user", ctx + "/templates/sbp/management/user/tpl_content_management_user.html" //
+					, "NewMenu2", "사용자 관리를 합니다." //
+					, [ ContentRouteConfig.ROLE_ADMIN //
+					] //
+					, "", false, false) //
+			],
+			icon : ""
+		};
 		// 관리
 	case ContentRouteConfig.MANAGEMENT:
 		return {
 			id : ContentRouteConfig.MANAGEMENT,//
 			content : "management",//
-			display : "Management",//
+			display : "MANAGEMENT",//
 			role : [ // 
 			ContentRouteConfig.ROLE_ADMIN //
 			],//

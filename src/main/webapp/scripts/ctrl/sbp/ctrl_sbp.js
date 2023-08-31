@@ -40,7 +40,7 @@ Authentication = function(auth) {
 	this.birth = auth.birth;
 	this.rank = auth.rank;
 	this.task = auth.task;
-	this.userGrade = auth.userGradeObj;
+	this.userGrade = auth.userGradeObj;	
 };
 
 var ngFilter = new NgFilter();
@@ -93,13 +93,8 @@ sbp.controller("SbpCtrl",
 //			$http.defaults.headers.common[__CSRF__.headerName] = __CSRF__.token;
 
 			$scope.routeContents = [
-			// new Content(ContentRouteConfig.getContents(ContentRouteConfig.APPLICATION)),
-			/*new Content(ContentRouteConfig.getContents(ContentRouteConfig.DATA)),
-				new Content(ContentRouteConfig.getContents(ContentRouteConfig.FRM)),
-					new Content(ContentRouteConfig.getContents(ContentRouteConfig.SERVICE)),
-					new Content(ContentRouteConfig.getContents(ContentRouteConfig.SUBSCRIPTION)),
-					new Content(ContentRouteConfig.getContents(ContentRouteConfig.PERMISSION)),*/
 					new Content(ContentRouteConfig.getContents(ContentRouteConfig.ANALYSIS)),
+					new Content(ContentRouteConfig.getContents(ContentRouteConfig.NEWMENU)),
 					new Content(ContentRouteConfig.getContents(ContentRouteConfig.MANAGEMENT)) ];
 
 
@@ -154,7 +149,7 @@ sbp.controller("SbpCtrl",
 			$scope.clickMenu = function(routeContent, menu, tbMenu) {
 				
 				// 모든 메뉴 항목에 대해 selected false 할당
-				if ((routeContent.content != "faci" && routeContent.content != "frm") || tbMenu != undefined){
+				if ((routeContent.content != "analysis") || tbMenu != undefined){
 					$scope.routeContents.forEach(function(routeContent) {
 						routeContent.menus.values().forEach(function(m) {
 							m.selected = false;
@@ -162,7 +157,7 @@ sbp.controller("SbpCtrl",
 					});
 				}
 				// 모든 테이블 항목에 대해 selected false 할당
-				if ((routeContent.content == "faci" || routeContent.content == "frm") && tbMenu != undefined) {
+				if ((routeContent.content == "analysis" ) && tbMenu != undefined) {
 					setSelectedFalseTable();
 				}
 				
@@ -175,7 +170,9 @@ sbp.controller("SbpCtrl",
 
 					setSelectedFalseTable();
 					
-					if (routeContent.content == "frm") {
+					
+					// TODO: 수정예정
+					if (routeContent.content == "analysis") {
 						routeContent.selected = true;
 						routeContent.menus.values()[0].menus[0].selected = true;
 						// Realtime Monitoring 메뉴 클릭 시 실시간 모니터링 -> 센싱장비정보 테이블 선택되도록 하기 위한 설정
@@ -186,17 +183,14 @@ sbp.controller("SbpCtrl",
 					
 					// 메인 메뉴 선택 시 메뉴 명 표시되도록 설정 
 					switch(routeContent.display) {
-					case "Service":
-						$rootScope.load_menu.path.push("Service");
+					case "Analysis":
+						$rootScope.load_menu.path.push("Analysis");
 						break;
-					case "Subscription":
-						$rootScope.load_menu.path.push("Application");
-						break;
-					case "Permission":
-						$rootScope.load_menu.path.push("Authorization");
+					case "NewMenu":
+						$rootScope.load_menu.path.push("NewMenu");
 						break;
 					case "Management":
-						$rootScope.load_menu.path.push("API");
+						$rootScope.load_menu.path.push("System");
 						break;
 					}
 					
@@ -211,7 +205,7 @@ sbp.controller("SbpCtrl",
 				} 
 
 				if (tbMenu == undefined) {
-					if (routeContent.content != "faci" && routeContent.content != "frm") {
+					if (routeContent.content != "analysis") {
 						setSelectedFalseTable();
 					}
 					return;
@@ -244,20 +238,20 @@ sbp.controller("SbpCtrl",
 			
 			// URL 이동
 			$scope.moveLocation = function(type, url){
-				
-				if(type == 'faci' || type == 'frm'){
+//				if(type == 'faci' || type == 'frm'){
+				if(type == 'analysis'){
 					return;
 				}
 				
 				$location.url(url)
 			}
 			
-			// FACI / 실시간 모니터링 하위 메뉴 그룹 Collapse & Expand
+			// ANALYSIS 메뉴 그룹 Collapse & Expand
 			$scope.collapseGroup = function(targetGroup) {
 
 				$scope.routeContents.forEach(function(routeContent) {
 
-					if (routeContent.content != "faci" && routeContent.content != "frm") {
+					if (routeContent.content != "analysis") {
 						return;
 					}
 
@@ -272,12 +266,12 @@ sbp.controller("SbpCtrl",
 
 			};
 			
-			// FACI 메뉴 전체 Expand & Collapse
+			// ANALYSIS 메뉴 전체 Expand & Collapse
 			$scope.allExpand = function(value){
 				
 				$scope.routeContents.forEach(function(routeContent) {
 
-					if (routeContent.content != "faci") {
+					if (routeContent.content != "analysis") {
 						return;
 					}
 
@@ -307,6 +301,12 @@ sbp.config(function($routeProvider, $locationProvider) {
 	$routeProvider.when("/main/:content_id", routeWhen);
 	
 	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.ANALYSIS);
+	$routeProvider.when("/analysis", routeWhen);
+	$routeProvider.when("/analysis/:content_id", routeWhen);
+	
+	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.NEWMENU);
+	$routeProvider.when("/newmenu", routeWhen);
+	$routeProvider.when("/newmenu/:content_id", routeWhen);
 
 	routeWhen = ContentRouteConfig.loadRoute(ContentRouteConfig.MANAGEMENT);
 	$routeProvider.when("/management", routeWhen);

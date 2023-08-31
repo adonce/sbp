@@ -33,7 +33,7 @@
 <!-- Main: E -->
 
 <!-- Management: S -->
-
+<script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/management/system/res_system.js"></script>
 <!-- Management: E -->
 
 <style type="text/css">
@@ -217,22 +217,21 @@
                 <div class="menu_style clickable" style="width: 195px;"ng-click="collapseGroup(menu);moveLocation(routeContent.content, '/' + routeContent.content + '/' + menu.key);clickMenu(routeContent, menu);">
                   <div class="sub_menu_icon_expand" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.collapse && routeContent.content == 'analysis'">&nbsp</div>
                   <div class="sub_menu_icon_collapse" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="menu.collapse || routeContent.content != 'analysis'">&nbsp</div>
-                  <!-- <div class="sub_menu_icon_collapse" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="menu.collapse || routeContent.content != 'analysis' && !menu.selected">&nbsp</div>
-                  <div class="sub_menu_icon_expand" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="menu.selected && routeContent.content != 'analysis'">&nbsp</div> -->
-                  <!-- <div class="left_menu_div" ng-if="!menu.standalone" style="padding-left: 2px;">{{menu.display}}</div> -->
-                  <div class="left_menu_div" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.standalone && (menu.display != '공통' && menu.display != '융합')" style="padding-left: 2px;">{{menu.display}}</div>
+                  
+                  <div class="left_menu_div" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.standalone" style="padding-left: 2px;">{{menu.display}}</div>
+                  <!-- <div class="left_menu_div" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.standalone && (menu.display != '공통' && menu.display != '융합')" style="padding-left: 2px;">{{menu.display}}</div>
                   <div class="left_menu_div" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.standalone && menu.display == '공통'" style="color: #e25a5a !important; padding-left: 2px;">{{menu.display}}</div>
-                  <div class="left_menu_div" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.standalone && menu.display == '융합'" style="color: #20bb20 !important; padding-left: 2px;">{{menu.display}}</div>
+                  <div class="left_menu_div" ng-class="menu.selected ? 'selected_menu' : ''" ng-if="!menu.standalone && menu.display == '융합'" style="color: #20bb20 !important; padding-left: 2px;">{{menu.display}}</div> -->
                 </div>
                 <!-- <a ng-if="routeContent.content != 'analysis' && !menu.standalone" href="{{routeContent.getUrl(menu.standalone)}}/{{menu.key}}" ng-click="clickMenu(routeContent, menu)" style="padding-left: 2px;">{{menu.display}}</a> -->
                 <a ng-if="menu.standalone" href=""
                 ng-click="handleStandalone(routeContent.content, menu.key, menu.templateUrl)">{{menu.display}}</a>
                 
                 <!-- analysis > Data > 각 Table -->
-                <ul ng-if="!menu.collapse && routeContent.content == 'analysis'">
+                <!-- <ul ng-if="!menu.collapse && routeContent.content == 'analysis'">
                   <li class="submenu analysis_li" ng-repeat="tbMenu in menu.menus track by $index" ng-if="isAllowedContent(tbMenu)" >
                     <div class="menu_style clickable">
-                      <!-- <img alt="" src="../images/analysis_sub_meu_icon.png" style="width:15px;height:15px;top: 0;position: relative;margin-left: 5px;"/> -->
+                      <img alt="" src="../images/analysis_sub_meu_icon.png" style="width:15px;height:15px;top: 0;position: relative;margin-left: 5px;"/>
                       <a class="analysis_sub_menu_a" style="width:100%;" ng-if="!tbMenu.standalone" href="{{routeContent.getUrl(menu.standalone)}}/{{menu.key}}/{{tbMenu.id}}" ng-click="clickMenu(routeContent, menu, tbMenu)">
                         <div class="analysis_sub_menu_div" title="{{tbMenu.display}}" ng-class="tbMenu.selected ? 'selected_menu' : ''" style="padding-left:20px;">
                           {{tbMenu.display}}
@@ -241,9 +240,10 @@
                       <a ng-if="tbMenu.standalone" href="" ng-click="handleStandalone(tbMenu.content, tbMenu.menus.values()[0].key, tbMenu.menus.values()[0].templateUrl)">{{tbMenu.display}} </a>
                     </div>
                   </li>
-                </ul>
+                </ul> -->
+                
                 <!-- 실시간 모니터링 > Data > 각 Table -->
-                <ul ng-if="!menu.collapse && routeContent.content == 'frm'">
+                <!-- <ul ng-if="!menu.collapse && routeContent.content == 'frm'">
                   <li class="submenu analysis_li" ng-repeat="tbMenu in menu.menus track by $index" ng-if="isAllowedContent(tbMenu)" >
                     <div class="menu_style clickable">
                       <a class="analysis_sub_menu_a" style="width:100%;" ng-if="!tbMenu.standalone" href="{{routeContent.getUrl(menu.standalone)}}/{{menu.key}}/{{tbMenu.id}}" ng-click="clickMenu(routeContent, menu, tbMenu)">
@@ -254,7 +254,7 @@
                       <a ng-if="tbMenu.standalone" href="" ng-click="handleStandalone(tbMenu.content, tbMenu.menus.values()[0].key, tbMenu.menus.values()[0].templateUrl)">{{tbMenu.display}} </a>
                     </div>
                   </li>
-                </ul>
+                </ul> -->
               </li>
             </ul>
             <hr class="left_menu_hr" size="10px;">
