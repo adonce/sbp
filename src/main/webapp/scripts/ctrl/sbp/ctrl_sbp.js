@@ -148,6 +148,7 @@ sbp.controller("SbpCtrl",
 			// 메뉴 클릭 시 해당 정보 저장
 			$scope.clickMenu = function(routeContent, menu, tbMenu) {
 				
+				//////////////////////////////////////////////////////////////////////////////////////////////////
 				// 모든 메뉴 항목에 대해 selected false 할당
 				if ((routeContent.content != "analysis") || tbMenu != undefined){
 					$scope.routeContents.forEach(function(routeContent) {
@@ -157,9 +158,9 @@ sbp.controller("SbpCtrl",
 					});
 				}
 				// 모든 테이블 항목에 대해 selected false 할당
-				if ((routeContent.content == "analysis" ) && tbMenu != undefined) {
+				/*if ((routeContent.content == "analysis" ) && tbMenu != undefined) {
 					setSelectedFalseTable();
-				}
+				}*/
 				
 				$rootScope.load_menu.path = [];
 
@@ -219,6 +220,7 @@ sbp.controller("SbpCtrl",
 				}
 
 			}
+				//////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			// 모든 테이블 항목에 대해 selected false 설정 
 			var setSelectedFalseTable = function() {
@@ -239,15 +241,15 @@ sbp.controller("SbpCtrl",
 			// URL 이동
 			$scope.moveLocation = function(type, url){
 //				if(type == 'faci' || type == 'frm'){
-				if(type == 'analysis'){
+				/*if(type == 'analysis'){
 					return;
-				}
+				}*/
 				
 				$location.url(url)
 			}
 			
 			// ANALYSIS 메뉴 그룹 Collapse & Expand
-			$scope.collapseGroup = function(targetGroup) {
+			/*$scope.collapseGroup = function(targetGroup) {
 
 				$scope.routeContents.forEach(function(routeContent) {
 
@@ -265,9 +267,9 @@ sbp.controller("SbpCtrl",
 				});
 
 			};
-			
+			*/
 			// ANALYSIS 메뉴 전체 Expand & Collapse
-			$scope.allExpand = function(value){
+			/*$scope.allExpand = function(value){
 				
 				$scope.routeContents.forEach(function(routeContent) {
 
@@ -281,7 +283,7 @@ sbp.controller("SbpCtrl",
 
 					});
 				});
-			};
+			};*/
 			
 		});
 

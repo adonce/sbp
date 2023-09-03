@@ -374,7 +374,7 @@ ContentRouteConfig.getContents = function(id) {
 					] //
 					, "", false, false),
 					
-					new ContentMenu("user", ctx + "/templates/sbp/management/user/tpl_content_management_user.html" //
+					new ContentMenu("newmenu2", ctx + "/templates/sbp/management/user/tpl_content_management_user.html" //
 					, "NewMenu2", "사용자 관리를 합니다." //
 					, [ ContentRouteConfig.ROLE_ADMIN //
 					] //
