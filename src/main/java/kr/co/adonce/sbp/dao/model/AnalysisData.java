@@ -1,16 +1,10 @@
-package kr.co.adonce.sbp.controller.model;
+package kr.co.adonce.sbp.dao.model;
 
-import java.sql.Timestamp;
-
-import kr.co.adonce.sbp.dao.model.AnalysisData;
-import open.commons.annotation.Getter;
+import kr.co.adonce.sbp.controller.model.AnalysisDataDTO;
+import open.commons.annotation.ColumnDef;
 import open.commons.json.annotation.JSONField;
-import open.commons.json.model.DefaultJSONModel;
 
-public class AnalysisDataDTO extends DefaultJSONModel {
-
-	/**  **/
-	private static final long serialVersionUID = 1L;
+public class AnalysisData {
 
 	/**
 	 * 번호
@@ -78,74 +72,44 @@ public class AnalysisDataDTO extends DefaultJSONModel {
 	@JSONField(name = "fPlcRt")
 	private double fPlcRt;
 
-	/**
-	 * 개찰일
-	 */
-	@JSONField(name = "openDay")
-	private Timestamp openDay;
+	public AnalysisData() {
 
-	public AnalysisDataDTO(AnalysisData data) {
-
-		this.num = data.getNum();
-		this.cnstNm = data.getCnstNm();
-		this.event = data.getEvent();
-		this.client = data.getClient();
-		this.region = data.getRegion();
-		this.baseAmnt = data.getBaseAmnt();
-		this.exPriceRt = data.getExPriceRt();
-		this.fAmnt = data.getfAmnt();
-		this.fdmtRt = data.getFdmtRt();
-		this.fPlcRt = data.getfPlcRt();
 	}
 
-	@Getter(name = "baseAmnt", type = Long.class)
 	public long getBaseAmnt() {
 		return baseAmnt;
 	}
 
-	@Getter(name = "client", type = String.class)
 	public String getClient() {
 		return client;
 	}
 
-	@Getter(name = "cnstNm", type = String.class)
 	public String getCnstNm() {
 		return cnstNm;
 	}
 
-	@Getter(name = "event", type = String.class)
 	public String getEvent() {
 		return event;
 	}
 
-	@Getter(name = "exPriceRt", type = Double.class)
 	public double getExPriceRt() {
 		return exPriceRt;
 	}
 
-	@Getter(name = "fAmnt", type = Long.class)
 	public long getfAmnt() {
 		return fAmnt;
 	}
 
-	@Getter(name = "fPlcRt", type = Double.class)
 	public double getfPlcRt() {
 		return fPlcRt;
 	}
 
-	@Getter(name = "ntcNum", type = String.class)
 	public String getNtcNum() {
 		return ntcNum;
 	}
 
-	@Getter(name = "num", type = Integer.class)
 	public int getNum() {
 		return num;
-	}
-
-	@Getter(name = "openDay", type = Timestamp.class)
-	public Timestamp getOpenDay() {
-		return openDay;
 	}
 
 	public double getFdmtRt() {
@@ -156,50 +120,57 @@ public class AnalysisDataDTO extends DefaultJSONModel {
 		return region;
 	}
 
+	@ColumnDef(name = "base_amnt", type = Long.class, caseSensitive = false, required = false)
 	public void setBaseAmnt(long baseAmnt) {
 		this.baseAmnt = baseAmnt;
 	}
 
+	@ColumnDef(name = "client", type = String.class, caseSensitive = false, required = false)
 	public void setClient(String client) {
 		this.client = client;
 	}
 
+	@ColumnDef(name = "cnst_nm", type = String.class, caseSensitive = false, required = false)
 	public void setCnstNm(String cnstNm) {
 		this.cnstNm = cnstNm;
 	}
 
+	@ColumnDef(name = "event", type = String.class, caseSensitive = false, required = false)
 	public void setEvent(String event) {
 		this.event = event;
 	}
 
+	@ColumnDef(name = "ex_price_rt", type = Double.class, caseSensitive = false, required = false)
 	public void setExPriceRt(double exPriceRt) {
 		this.exPriceRt = exPriceRt;
 	}
 
+	@ColumnDef(name = "f_amnt", type = Long.class, caseSensitive = false, required = false)
 	public void setfAmnt(long fAmnt) {
 		this.fAmnt = fAmnt;
 	}
 
+	@ColumnDef(name = "f_plc_rt", type = Double.class, caseSensitive = false, required = false)
 	public void setfPlcRt(double fPlcRt) {
 		this.fPlcRt = fPlcRt;
 	}
 
+	@ColumnDef(name = "ntc_num", type = String.class, caseSensitive = false, required = false)
 	public void setNtcNum(String ntcNum) {
 		this.ntcNum = ntcNum;
 	}
 
+	@ColumnDef(name = "num", type = Integer.class, caseSensitive = false, required = false)
 	public void setNum(int num) {
 		this.num = num;
 	}
 
-	public void setOpenDay(Timestamp openDay) {
-		this.openDay = openDay;
-	}
-
+	@ColumnDef(name = "fdmt_rt", type = Double.class, caseSensitive = false, required = false)
 	public void setFdmtRt(double fdmtRt) {
 		this.fdmtRt = fdmtRt;
 	}
 
+	@ColumnDef(name = "region", type = String.class, caseSensitive = false, required = false)
 	public void setRegion(String region) {
 		this.region = region;
 	}
@@ -207,7 +178,7 @@ public class AnalysisDataDTO extends DefaultJSONModel {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("AnalysisDataDTO [num=");
+		builder.append("AnalysisData [num=");
 		builder.append(num);
 		builder.append(", cnstNm=");
 		builder.append(cnstNm);
@@ -229,8 +200,6 @@ public class AnalysisDataDTO extends DefaultJSONModel {
 		builder.append(fdmtRt);
 		builder.append(", fPlcRt=");
 		builder.append(fPlcRt);
-		builder.append(", openDay=");
-		builder.append(openDay);
 		builder.append("]");
 		return builder.toString();
 	}
