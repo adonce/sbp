@@ -1,0 +1,268 @@
+<style>
+textarea {
+    resize: none;
+}
+</style>
+<div class="layer" ng-controller="AnalysisCtrl">
+  <!-- contents :S -->
+  <div id="contents">
+    <h2>
+      <p>
+        <span ng-repeat="data in path track by $index" style="font-size: 15px;">{{data}}</span>
+      </p>
+    </h2>
+    <!-- Property List :S -->
+    <div class="div_table mb_30">
+      <h3 class="mt_15 mb_0" ng-if="propType == 0">{{path[1]}}&nbspProperty</h3>
+      <h3 class="mt_15 mb_0" ng-if="propType != 0">Upload&nbsp{{path[1]}}&nbspProperty</h3>
+      <p class="counter">
+        <button class="btn ty2" style="height:28px;" ng-click="movePropTab()">
+          <span ng-if="propType == 0">Upload Property</span>
+          <span ng-if="propType == 1">System Property</span>
+        </button>
+        <button class="detail_btn" ng-if="propType == 0"  ng-click="registSystemProperty()" ng-confirm-click="등록하시겠습니까?">
+          <span>Regist</span>
+        </button>
+        <button class="detail_btn" ng-if="propType != 0" ng-click="registUploadProperty()" ng-confirm-click="등록하시겠습니까?">
+          <span>Regist</span>
+        </button>
+      </p>
+      <!-- 시스템 설정 정보 추가 테이블 : s-->
+      <table border="0" cellspacing="0" cellpadding="5" class="basic_table"  ng-if="propType == 0">
+        <caption>Property Info</caption>
+        <thead>
+          <tr>
+            <th width="15%">Column</th>
+            <th width="15%">Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="height: 40px">
+              <textarea type="text" name="name_input" ng-model="registPropertyObj.name" placeholder="이름을 입력하세요."
+                style="width: 100%; height: 75px;"></textarea>
+            </td>
+            <td>
+              <textarea type="text" name="value_input" ng-model="registPropertyObj.value" placeholder="값을 입력하세요."
+                style="width: 100%; height: 75px;"></textarea>
+            </td>
+            <td>
+              <textarea type="text" name="descr_input" ng-model="registPropertyObj.descr" placeholder="설명을 입력하세요."
+                style="width: 100%; height: 75px;"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- 시스템 설정 정보 추가 테이블 : e-->
+      <!-- 업로드 관련 설정 정보 추가 테이블 : s-->
+      <table border="0" cellspacing="0" cellpadding="5" class="basic_table"  ng-if="propType != 0">
+        <caption>Upload Property Info</caption>
+        <thead>
+          <tr>
+            <th width="20%">Name</th>
+            <th width="20%">File</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" name="value_input" ng-model="registUploadPropertyObj.id" placeholder="이름을 입력하세요."
+                style="width: 100%; height: 28px;">
+            </td>
+            <td style="height: 40px">
+              <input type="file" name="file" onchange="angular.element(this).scope().selectFile(this.files)" placeholder="파일을 선택하세요."
+                style="width: 100%; height: 28px;">
+            </td>
+            <td>
+              <input type="text" name="descr_input" ng-model="registUploadPropertyObj.description" placeholder="설명을 입력하세요."
+                style="width: 100%; height: 28px;">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- 업로드 관련 설정 정보 추가 테이블 : e-->
+    </div>
+    <!-- Property List :E -->
+
+    <!-- System Properties  List :S -->
+    <div class="div_table" ng-if="propType == 0">
+      <h3>System Properties List</h3>
+      <div class="counter">
+        <p>
+          <span> <input type="text" name="search_input" ng-model="search" placeholder="검색어를 입력하세요."
+            style="width: 200px; height: 28px;">
+          </span> <span style="padding: 0px 10px;"> 총 {{(systemProperties | filter:search).length}}건 </span> <span> <select
+              class="ng-pristine ng-valid" name="select" ng-model="pagination.itemCountPerPage"
+              ng-options="opt.value as opt.name for opt in pageOptions">
+            </select>
+          </span>
+        </p>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="5" class="basic_table">
+        <caption>System Properties List</caption>
+        <thead>
+          <tr>
+            <th class="clickable no_select" ng-click="order('name')" width="20%">Column <span class="sortorder"
+              ng-show="predicate === 'name'" ng-class="{reverse:reverse}"></span>
+            </th>
+            <th class="clickable no_select" ng-click="order('value')" width="20%">Value <span class="sortorder"
+              ng-show="predicate === 'value'" ng-class="{reverse:reverse}"></span>
+            </th>
+            <th class="clickable no_select" ng-click="order('desc')" width="40%">Description <span class="sortorder"
+              ng-show="predicate === 'desc'" ng-class="{reverse:reverse}"></span>
+            </th>
+            <th width="150px">etc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            ng-repeat="property in systemProperties | orderBy:predicate:reverse | filter:search | startFrom: (pagination.pageNum-1)*pagination.itemCountPerPage 
+            | limitTo:pagination.itemCountPerPage">
+            <td style="word-break: break-all; text-align: left;">{{property.name}}</td>
+            <td style="word-break: break-all; text-align: left;">
+              <span ng-if="!property.updateFlag" style="white-space:pre-line;">{{property.value}}</span> 
+              <span ng-if="property.updateFlag"> <textarea
+                type="text" name="name_input" ng-model="modifyPropertyObj.value" placeholder="값을 입력하세요."
+                style="width: 100%; height: 75px;"></textarea>
+              </span>
+            </td>
+            <td style="word-break: break-all; text-align: left;">
+              <span ng-if="!property.updateFlag">{{property.descr}}</span> <span ng-if="property.updateFlag"> <textarea
+                type="text" name="name_input" ng-model="modifyPropertyObj.descr" placeholder="설명을 입력하세요."
+                style="width: 100%; height: 75px;"></textarea>
+              </span>
+            </td>
+            <td>
+              <button class="btn small ty4" ng-if="!property.updateFlag" ng-click="modifyForm(property);">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </button>
+              <button class="btn small ty4" ng-if="!property.updateFlag" ng-click="deleteSystemProperty(property.name)"
+                style="height: 22px; padding: 5px 8px 4px;" ng-confirm-click="삭제하시겠습니까?">
+                <i class="far fa-trash-alt" aria-hidden="true"></i>
+              </button>
+              <button class="btn small ty4" style="background-color: #1a92e9; border-color: #0e7ac8; color: white;"
+                ng-if="property.updateFlag" ng-click="modifySystemProperty()" ng-confirm-click="저장하시겠습니까?">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              </button>
+              <button class="btn small ty2" ng-if="property.updateFlag"
+                ng-click="property.updateFlag = !property.updateFlag">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+          <tr ng-if="(systemProperties | filter:search).length < 1">
+            <td colspan="4">검색된 결과가 없습니다.</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Pagination :S -->
+      <div style="text-align: center;">
+        <ul uib-pagination total-items="(systemProperties | filter:search).length" ng-model="pagination.pageNum"
+          max-size="pagination.pageMaxSize" items-per-page="pagination.itemCountPerPage" class="pagination-sm" boundary-links="true"
+          boundary-links-numbers="true" rotate="false" previous-text="<" next-text=">" first-text="<<"
+          last-text=">>">
+        </ul>
+      </div>
+      <!-- Pagination :E -->
+    </div>
+    <!-- System Properties List :E -->
+    <!-- 업로드 관련 프로퍼티 목록 :S -->
+    <div class="div_table" ng-if="propType != 0">
+      <h3>Upload System Properties List</h3>
+      <div class="counter">
+        <p>
+          <span> <input type="text" name="search_input" ng-model="search" placeholder="검색어를 입력하세요."
+            style="width: 200px; height: 28px;">
+          </span> <span style="padding: 0px 10px;"> 총 {{(uploadProperties | filter:search).length}}건 </span> <span> <select
+              class="ng-pristine ng-valid" name="select" ng-model="pagination.itemCountPerPage"
+              ng-options="opt.value as opt.name for opt in pageOptions">
+            </select>
+          </span>
+        </p>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="5" class="basic_table">
+        <caption>Upload System Properties List</caption>
+        <thead>
+          <tr>
+            <th class="clickable no_select" ng-click="order('value')" width="20%">Name <span class="sortorder"
+              ng-show="predicate === 'value'" ng-class="{reverse:reverse}"></span>
+            </th>
+            <th class="clickable no_select" ng-click="order('name')" width="20%">File Name <span class="sortorder"
+              ng-show="predicate === 'name'" ng-class="{reverse:reverse}"></span>
+            </th>
+            <th class="clickable no_select" ng-click="order('desc')" width="40%">Description <span class="sortorder"
+              ng-show="predicate === 'desc'" ng-class="{reverse:reverse}"></span>
+            </th>
+            <th width="150px">etc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            ng-repeat="property in uploadProperties | orderBy:predicate:reverse | filter:search | startFrom: (pagination.pageNum-1)*pagination.itemCountPerPage 
+            | limitTo:pagination.itemCountPerPage">
+            <td style="word-break: break-all; text-align: left;">
+              <span>{{property.id}}</span> 
+              <!-- <span ng-if="property.updateFlag"> 
+                <input type="text" name="name_input" ng-model="modifyUploadPropertyObj.id" placeholder="이름을 입력하세요."
+                    style="width: 100%; height: 28px;">
+              </span> -->
+            </td>
+            <td style="word-break: break-all; text-align: left;">
+              <span ng-if="!property.updateFlag">{{property.filename}}</span>
+              <span ng-if="property.updateFlag">
+                <input type="file" name="file" onchange="angular.element(this).scope().selectModifyFile(this.files)" placeholder="파일을 선택하세요."
+                style="width: 100%; height: 28px;">
+              </span>
+            </td>
+            <td style="word-break: break-all; text-align: left;">
+              <span ng-if="!property.updateFlag">{{property.description}}</span> <span ng-if="property.updateFlag"> <input
+                type="text" name="name_input" ng-model="modifyUploadPropertyObj.description" placeholder="설명을 입력하세요."
+                style="width: 100%; height: 28px;">
+              </span>
+            </td>
+            <td>
+              <button class="btn small ty4" ng-if="!property.updateFlag" ng-click="modifyForm(property);">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </button>
+              <button class="btn small ty4" ng-if="!property.updateFlag" ng-click="deleteUploadProperty(property.id)"
+                style="height: 22px; padding: 5px 8px 4px;" ng-confirm-click="삭제하시겠습니까?">
+                <i class="far fa-trash-alt" aria-hidden="true"></i>
+              </button>
+              <button class="btn small ty4" style="background-color: #1a92e9; border-color: #0e7ac8; color: white;"
+                ng-if="property.updateFlag" ng-click="modifyUploadProperty()" ng-confirm-click="저장하시겠습니까?">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              </button>
+              <button class="btn small ty2" ng-if="property.updateFlag"
+                ng-click="property.updateFlag = !property.updateFlag">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+          <tr ng-if="(uploadProperties | filter:search).length < 1">
+            <td colspan="4">검색된 결과가 없습니다.</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Pagination :S -->
+      <div style="text-align: center;">
+        <ul uib-pagination total-items="(uploadProperties | filter:search).length" ng-model="pagination.pageNum"
+          max-size="pagination.pageMaxSize" items-per-page="pagination.itemCountPerPage" class="pagination-sm" boundary-links="true"
+          boundary-links-numbers="true" rotate="false" previous-text="<" next-text=">" first-text="<<"
+          last-text=">>">
+        </ul>
+      </div>
+      <!-- Pagination :E -->
+    </div>
+    <!-- 업로드 관련 설정 정보 목록:E -->
+  </div>
+  <!-- contents :E -->
+  <!-- masking :S -->
+  <div ng-if="!masking.loadingList.getFinished()" class="content_masking_loading">
+    <div class="container_masking_loading" style="width: max-content;">
+      <i class="fa fa-spinner fa-pulse fa-1x fa-fw" style="width: 50px; font-size: 0.9em;"></i> 정보를 불러오는 중입니다.
+    </div>
+  </div>
+  <!-- masking :E -->
+</div>

@@ -32,6 +32,11 @@
 <script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/main/ctrl_main.js"></script>
 <!-- Main: E -->
 
+<!-- Analysis: S -->
+<script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/analysis/bidding/res_analysis.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/analysis/bidding/ctrl_analysis_bidding.js"></script>
+<!-- Analysis: E -->
+
 <!-- Management: S -->
 <script type="text/javascript" src="${ctx}/scripts/ctrl/sbp/management/system/res_system.js"></script>
 <!-- Management: E -->
